@@ -131,13 +131,16 @@
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="picoPNG.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
     <ClInclude Include="GLSLProgram.h" />
+    <ClInclude Include="GLTexture.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="picoPNG.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vertex.h" />
