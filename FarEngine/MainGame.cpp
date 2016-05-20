@@ -52,7 +52,9 @@ void MainGame::initShaders()
 	m_colorProgram.compileShaders("Shaders/colorShading.vert", "Shaders/colorShading.frag");
 	m_colorProgram.addAttribute("vertexPosition");
 	m_colorProgram.addAttribute("vertexColor");
+	m_colorProgram.addAttribute("vertexUV");
 	m_colorProgram.linkShaders();
+	m_playerTexture = ImageLoader::loadPNG("Textures/test.png");
 }
 
 void MainGame::gameLoop()
@@ -89,11 +91,18 @@ void MainGame::draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_colorProgram.use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_playerTexture.id);
+
+	GLint textureLocation = m_colorProgram.getUniformLocation("mySampler");
+	glUniform1i(textureLocation, 0);
 
 	GLuint timeLocation = m_colorProgram.getUniformLocation("time");
 	glUniform1f(timeLocation, m_time);
 
 	this->m_sprite.draw();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	m_colorProgram.unuse();
 

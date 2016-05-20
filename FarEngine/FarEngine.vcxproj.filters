@@ -72,4 +72,12 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\colorShading.frag">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="Shaders\colorShading.vert">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+  </ItemGroup>
 </Project>
