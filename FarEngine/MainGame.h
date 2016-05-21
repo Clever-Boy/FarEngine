@@ -36,8 +36,7 @@ private:
 	float m_time;
 
 	// tmp
-	Sprite m_sprite;
-	GLSLProgram m_colorProgram;
-	GLTexture m_playerTexture;
+	std::vector<Sprite*> m_sprites;
+	GLSLProgram m_colorProgram;	
 };
 

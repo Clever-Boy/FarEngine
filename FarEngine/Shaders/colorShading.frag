@@ -17,6 +17,6 @@ void main() {
 								 1.0 * (sin(time + 1.0)+1.0) * 0.5,
 								 1.0);
 	
-	color = textureColor * tmp;
+	color = tmp * textureColor;
 	
 }

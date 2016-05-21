@@ -10,6 +10,6 @@
 class ImageLoader
 {
 public:
-	static GLTexture loadPNG(std::string filePath);
+	static GLTexture loadPNG(std::string filePath); // Loads an image and return a GLtexture
 };
 

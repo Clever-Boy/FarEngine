@@ -20,18 +20,26 @@ void MainGame::run()
 
 	this->initShaders();
 
-	this->m_sprite.init(-1.0f, -1.0f, 2.0f, 2.0f);
+	m_sprites.push_back(new Sprite());	
+	m_sprites.back()->init(-1.0f, -1.0f, 1.0f, 1.0f,"Textures/test.png");
+
+	m_sprites.push_back(new Sprite());
+	m_sprites.back()->init(0.0f, -1.0f, 1.0f, 1.0f, "Textures/test.png");
+
+	m_sprites.push_back(new Sprite());
+	m_sprites.back()->init(-1.0f, 0.0f, 1.0f, 1.0f, "Textures/test.png");
 
 	this->gameLoop();
 }
 
 void MainGame::initSystems()
 {
+	// Init SDL subsystems
 	if (SDL_Init(SDL_INIT_EVERYTHING) > 0)
 		fatalError(SDL_GetError());
 
+	// Create a OpenGL window
 	this->m_window = SDL_CreateWindow("FarEngine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->m_screenWidth, this->m_screenHeight, SDL_WINDOW_OPENGL);
-
 	if (this->m_window == nullptr)
 		fatalError(SDL_GetError());
 
@@ -54,14 +62,14 @@ void MainGame::initShaders()
 	m_colorProgram.addAttribute("vertexColor");
 	m_colorProgram.addAttribute("vertexUV");
 	m_colorProgram.linkShaders();
-	m_playerTexture = ImageLoader::loadPNG("Textures/test.png");
+	
 }
 
 void MainGame::gameLoop()
 {
 	while (this->m_state != GameState::EXIT)
 	{
-		this->m_time += 0.0001;
+		this->m_time += 0.0001f;
 		this->processInput();
 		this->draw();
 	}
@@ -91,8 +99,7 @@ void MainGame::draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_colorProgram.use();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_playerTexture.id);
+	
 
 	GLint textureLocation = m_colorProgram.getUniformLocation("mySampler");
 	glUniform1i(textureLocation, 0);
@@ -100,7 +107,11 @@ void MainGame::draw()
 	GLuint timeLocation = m_colorProgram.getUniformLocation("time");
 	glUniform1f(timeLocation, m_time);
 
-	this->m_sprite.draw();
+	for (unsigned int i = 0; i < m_sprites.size(); i++)
+	{
+		this->m_sprites.at(i)->draw();
+	}
+	
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
